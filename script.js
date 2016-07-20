@@ -84,6 +84,11 @@ var RING_ONE_DESCRIPTION = "Consistent native-like or near-native pronunciation"
 var RING_TWO_DESCRIPTION = "Generally correct with occasional mistakes";
 var RING_THREE_DESCRIPTION = "Approximates are used with some English influence";
 var RING_FOUR_DESCRIPTION = "Pronounced as in English mostly if not at all times";
+var TARGET_A = "Target A: Vowels, Voiceless Stops, Voiced Stopped Consonants";
+var TARGET_B = "Target B: Vibrants ('/r/'), Voiceless Spirants, Nasals, Palatals";
+
+
+
 
 var radii = [
   { length: 0 },
@@ -166,6 +171,12 @@ function drawBullsEyeFirst(id, arr) {
   fillCategoriesAndLabel(arr);
   drawCircles();
   drawRadii(arr);
+  writeVariable(TARGET_A, xForCenteredText(TARGET_A), 30, FONT_STYLE_20PX_BOLD, BLACK);
+
+}
+
+function xForCenteredText(text) {
+  return (canvasWidth - (text.length * 9)) / 2;
 }
 
 function drawBullsEyeSecond(id, arr) {
@@ -177,6 +188,7 @@ function drawBullsEyeSecond(id, arr) {
   fillCategoriesAndLabel(arr);
   drawCircles();
   drawRadii(arr);
+  writeVariable(TARGET_B, xForCenteredText(TARGET_B), 30, FONT_STYLE_20PX_BOLD, BLACK);
 }
 
 function drawRadii(arr) {
