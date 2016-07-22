@@ -86,9 +86,7 @@ var RING_THREE_DESCRIPTION = "Approximates are used with some English influence"
 var RING_FOUR_DESCRIPTION = "Pronounced as in English mostly if not at all times";
 var TARGET_A = "Target A: Vowels, Voiceless Stops, Voiced Stopped Consonants";
 var TARGET_B = "Target B: Vibrants ('/r/'), Voiceless Spirants, Nasals, Palatals";
-
-
-
+var CHART_TITLE = "Overview of Pronunciation Accuracy";
 
 var radii = [
   { length: 0 },
@@ -102,19 +100,63 @@ var totalRingThrees = [];
 var totalRingFours = [];
 
 _setScores();
-graphResults("chart");
-
-setCanvas("chart-explanation");
-setCenter();
-
-writeVariable("hey", 100, 100, FONT_STYLE_20PX_BOLD, BLACK);
-
 drawBullsEyeFirst("a", categoryOneArr);
 drawBullsEyeSecond("b", categoryTwoArr);
+graphResults("chart");
+chartExplanation();
 
+function chartExplanation() {
+  // setCanvas("chart-explanation");
+  // setCenter();
+
+  var totalPhonemes = totalRingOnes.length + totalRingTwos.length + totalRingThrees.length + totalRingFours.length;
+  var ringOnePercentage = (totalRingOnes.length / totalPhonemes * 100).toFixed(1);
+  var ringTwoPercentage = (totalRingTwos.length / totalPhonemes * 100).toFixed(1);
+  var ringThreePercentage = (totalRingThrees.length / totalPhonemes * 100).toFixed(1);
+  var ringFourPercentage = (totalRingFours.length / totalPhonemes * 100).toFixed(1);
+
+
+  var explanation = "We rated your pronunciation samples across " + totalPhonemes;
+  explanation += " pronunciation categories. Each category was given a rank of Not Close to Bullseye.";
+  explanation += "<br><br>";
+  explanation += "The ratings are explained here:";
+  explanation += "<br>";
+  explanation += "<ul>";
+  explanation += "<li>" + RING_ONE_LABEL + ": " + RING_ONE_DESCRIPTION + "</li>";
+  explanation += "<li>" + RING_TWO_LABEL + ": " + RING_TWO_DESCRIPTION + "</li>";
+  explanation += "<li>" + RING_THREE_LABEL + ": " + RING_THREE_DESCRIPTION + "</li>";
+  explanation += "<li>" + RING_FOUR_LABEL + ": " + RING_FOUR_DESCRIPTION + "</li>";
+  explanation += "</ul>";
+
+  explanation += "We scored your pronunciation in " + ringOnePercentage + "% of those ";
+  explanation += totalPhonemes + " categories as hitting the " + RING_ONE_LABEL + ", ";
+  explanation += ringTwoPercentage + "% rated as " + RING_TWO_LABEL + ", ";
+  explanation += ringThreePercentage + "% as " + RING_THREE_LABEL + ", ";
+  explanation += "and " + ringFourPercentage + "% as " + RING_FOUR_LABEL + ".";
+
+  document.getElementById("div-explanation").innerHTML = explanation;
+
+
+  // for (var i = 0; i < lines.length; i++) {
+  //   // writeVariable(lines[i], 100, 100 + 30 * i, FONT_STYLE_20PX_BOLD, BLACK);
+  //   write(lines[i], 100, 100 + 30 * i);
+  // }
+
+  // var totalPhonemes = totalRingOnes.length + totalRingTwos.length + totalRingThrees.length + totalRingFours.length;
+  // var ringOnePercentage = (totalRingOnes.length / totalPhonemes * 100).toFixed(1);
+  // var ringTwoPercentage = (totalRingTwos.length / totalPhonemes * 100).toFixed(1);
+  // var ringThreePercentage = (totalRingThrees.length / totalPhonemes * 100).toFixed(1);
+  // var ringFourPercentage = (totalRingFours.length / totalPhonemes * 100).toFixed(1);
+
+  // writeVariable(totalRingOnes.length + " - " + ringOnePercentage, 100, 100, FONT_STYLE_20PX_BOLD, BLACK);
+  // writeVariable(totalRingTwos.length + " - " + ringTwoPercentage, 100, 130, FONT_STYLE_20PX_BOLD, BLACK);
+  // writeVariable(totalRingThrees.length + " - " + ringThreePercentage, 100, 160, FONT_STYLE_20PX_BOLD, BLACK);
+  // writeVariable(totalRingFours.length + " - " + ringFourPercentage, 100, 190, FONT_STYLE_20PX_BOLD, BLACK);
+
+}
 
 function _setScores() {
-  setFirstScores(2, 0, 0, 2, 1, 3, 2, 3, 3, 3, 2, 3);
+  setFirstScores(2, 1, 0, 2, 1, 3, 2, 3, 3, 3, 2, 3);
   setSecondScores(1, 3, 3, 1, 2, 2, 3, 3, 1, 3, 2);
   // setFirstScores(0, 0, 0, 2, 2, 3, 2, 0, 3, 0, 2, 3);
   // setSecondScores(1, 3, 3, 0, 2, 2, 2, 2, 1, 0, 2);
@@ -172,7 +214,6 @@ function drawBullsEyeFirst(id, arr) {
   drawCircles();
   drawRadii(arr);
   writeVariable(TARGET_A, xForCenteredText(TARGET_A), 30, FONT_STYLE_20PX_BOLD, BLACK);
-
 }
 
 function xForCenteredText(text) {
@@ -320,6 +361,8 @@ function graphResults(id) {
   writeVariable(RING_TWO_LABEL, x2 + calculateMargin(barWidth, RING_TWO_LABEL), baseY + 2 * margin, FONT_STYLE_20PX_BOLD, BLACK);
   writeVariable(RING_THREE_LABEL, x3 + calculateMargin(barWidth, RING_THREE_LABEL), baseY + 2 * margin, FONT_STYLE_20PX_BOLD, BLACK);
   writeVariable(RING_FOUR_LABEL, x4 + calculateMargin(barWidth, RING_FOUR_LABEL), baseY + 2 * margin, FONT_STYLE_20PX_BOLD, BLACK);
+
+  writeVariable(CHART_TITLE, xForCenteredText(CHART_TITLE), 30, FONT_STYLE_20PX_BOLD, BLACK);
 }
 
 function calculateMargin(barWidth, text) {
@@ -453,5 +496,9 @@ function writeScoresInBar(x, y, scoresArray, height, margin) {
 function writeVariable(text, x, y, style, color) {
   context.font = style;
   context.fillStyle = color;
+  context.fillText(text, x, y);
+}
+
+function write(text, x, y) {
   context.fillText(text, x, y);
 }

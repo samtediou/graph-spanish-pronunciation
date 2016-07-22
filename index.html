@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pie</title>
+    <title>Analysis</title>
     <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
   </head>
   <style type="text/css">
@@ -9,22 +9,28 @@
   </style>
   <body>
     <center>
-    <canvas id="chart" width="800" height="600">Your browswer does not support HTML5 Canvas.</canvas>
-    <br>
-    <canvas id="chart-explanation" width="800" height="300">Your browswer does not support HTML5 Canvas.</canvas>
+    <canvas id="a" width="800" height="600" style='border: 0px none black;'>Your browswer does not support HTML5 Canvas.</canvas>
     </center>
     <br>
     <br>
     <center>
-    <canvas id="a" width="800" height="600">Your browswer does not support HTML5 Canvas.</canvas>
-    </center>
-    <br>
-    <br>
-    <center>
-    <canvas id="b" width="800" height="600">Your browswer does not support HTML5 Canvas.</canvas>
+    <canvas id="b" width="800" height="600" style='border: 0px none black;'>Your browswer does not support HTML5 Canvas.</canvas>
   </center>
+  <br>
+  <br>
+  <center>
+  <canvas id="chart" width="800" height="600" style='border: 0px none black;'>Your browswer does not support HTML5 Canvas.</canvas>
+  </center>
+  <br>
+  <center>
+  <div id="div-explanation" style='max-width: 700px; border-style: none; text-align: left; font: bold 20px Garamond; padding-left: 50px; padding-right: 50px; word-break: normal;'></div>
+  </center>
+  <!-- <br>
+  <center>
+  <canvas id="chart-explanation" width="800" height="300">Your browswer does not support HTML5 Canvas.</canvas>
+  </center> -->
+
    <script type='text/javascript' src='../addgrid.js'></script>
    <script type='text/javascript' src='script.js'></script>
-   <script type='text/javascript' src='drawing.js'></script>
   </body>
 </html>
