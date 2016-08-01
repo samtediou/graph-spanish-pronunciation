@@ -24,32 +24,32 @@ var SZH = 9;
 var Y_LL = 10;
 
 var categoryOneArr = [
-    { angle: 0, category: '/p/', score: 0 },
-    { angle: 0, category: '/t/', score: 0 },
-    { angle: 0, category: '/k/', score: 0 },
-    { angle: 0, category: '/d/-/dh/', score: 0 },
-    { angle: 0, category: '/b/-/bh/', score: 0 },
-    { angle: 0, category: '/g/-/gh/', score: 0 },
-    { angle: 0, category: 'a', score: 0 },
-    { angle: 0, category: 'e', score: 0 },
-    { angle: 0, category: 'i', score: 0 },
-    { angle: 0, category: 'o', score: 0 },
-    { angle: 0, category: 'u', score: 0 },
-    { angle: 0, category: 'unstr. V', score: 0 }
+    { angle: 0, category: 'a', score: 0, explanation: 'Pronounced much like the \'a\' in \'father\', but somewhat brighter. The mouth remains fixed in position throughout the entire vowel.', examples: 'abanico, gato'},
+    { angle: 0, category: 'e', score: 0, explanation: 'Pronounced much like the \'e\' in \'they\'. The mouth remains fixed in position throughout the entire vowel.', examples: 'Pepe, techo'},
+    { angle: 0, category: 'i', score: 0, explanation: 'Pronounced much like the \'i\' in \'machine\', but generally shorter. The mouth remains fixed in position throughout the entire vowel.', examples: 'Isidro, silueta'},
+    { angle: 0, category: 'o', score: 0, explanation: 'Pronounced much like the \'o\' in \'toe\'. The mouth remains fixed in position throughout the entire vowel.', examples: 'policía, topo'},
+    { angle: 0, category: 'u', score: 0, explanation: 'Pronounced much like the \'u\' sound in \'food\' or \'attitude\'. The mouth remains fixed in position throughout the entire vowel.', examples: 'Plutón, urgente'},
+    { angle: 0, category: 'unstr. V', score: 0, explanation: 'The schwa, or \'uh\' sound occurs in many unstressed syllables in English words. This does not happen in Spanish.', examples: 'Estéfani, pirata'},
+    { angle: 0, category: '/p/', score: 0, explanation: 'This sound doesn\'t have an accompanying puff of air.', examples: 'padre, pata'},
+    { angle: 0, category: '/t/', score: 0, explanation: 'This sound doesn\'t have an accompanying puff of air.', examples: 'tapa, inteligente'},
+    { angle: 0, category: '/k/', score: 0, explanation: 'This sound doesn\'t have an accompanying puff of air.', examples: 'cama, café'},
+    { angle: 0, category: '/d/-/dh/', score: 0, explanation: 'Sometimes pronounced much like an English \'d\', sometimes like a soft \'th\' as in \'they\'.', examples: 'dedo, divinidad'},
+    { angle: 0, category: '/b/-/bh/', score: 0, explanation: 'The Spanish letters \'b\' and \'v\' can each be pronounced as /b/ and /bh/, depending on their position in a word and surrounding sounds.', examples: 'babosa, vivir'},
+    { angle: 0, category: '/g/-/gh/', score: 0, explanation: 'The Spanish \'g\' has two distinct pronunciations, depending on its position in a word and the surrounding sounds.', examples: 'gripe, lago'}
 ];
 
 var categoryTwoArr = [
-    { angle: 0, category: 'rV', score: 0 },
-    { angle: 0, category: 'VrV', score: 0 },
-    { angle: 0, category: 'VrrV', score: 0 },
-    { angle: 0, category: 'rC', score: 0 },
-    { angle: 0, category: 'Cr', score: 0 },
-    { angle: 0, category: 'Vr', score: 0 },
-    { angle: 0, category: 'VdV VrV', score: 0 },
-    { angle: 0, category: '/h/', score: 0 },
-    { angle: 0, category: '/l/', score: 0 },
-    { angle: 0, category: 's, z, -h', score: 0 },
-    { angle: 0, category: '/y/', score: 0 }
+    { angle: 0, category: 'rV', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'VrV', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'VrrV', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'rC', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'Cr', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'Vr', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 'VdV VrV', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: '/h/', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: '/l/', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: 's, z, -h', score: 0 , explanation: '', examples: ''},
+    { angle: 0, category: '/y/', score: 0, explanation: '', examples: '' }
 ];
 
 
@@ -101,20 +101,34 @@ var totalRingFours = [];
 
 _setScores();
 drawBullsEyeFirst("a", categoryOneArr);
+aExplanation();
 drawBullsEyeSecond("b", categoryTwoArr);
 graphResults("chart");
 chartExplanation();
 
-function chartExplanation() {
-  // setCanvas("chart-explanation");
-  // setCenter();
+function aExplanation() {
 
+  // var explanation = "<ul>";
+  // for (var i = 0; i < categoryOneArr.length; i++) {
+  //   explanation += "<li><strong>" + categoryOneArr[i].category + "</strong>: " + categoryOneArr[i].explanation + " (<strong>" + categoryOneArr[i].examples + "</strong>)" + "</li>";
+  // }
+  // explanation += "</ul>";
+
+  var explanation = "";
+  for (var i = 0; i < categoryOneArr.length; i++) {
+    explanation += "<p><strong>" + categoryOneArr[i].category + "</strong>: " + categoryOneArr[i].explanation + " (<strong>" + categoryOneArr[i].examples + "</strong>)" + "</p>";
+  }
+
+  document.getElementById("a-explanation").innerHTML = explanation;
+
+}
+
+function chartExplanation() {
   var totalPhonemes = totalRingOnes.length + totalRingTwos.length + totalRingThrees.length + totalRingFours.length;
   var ringOnePercentage = (totalRingOnes.length / totalPhonemes * 100).toFixed(1);
   var ringTwoPercentage = (totalRingTwos.length / totalPhonemes * 100).toFixed(1);
   var ringThreePercentage = (totalRingThrees.length / totalPhonemes * 100).toFixed(1);
   var ringFourPercentage = (totalRingFours.length / totalPhonemes * 100).toFixed(1);
-
 
   var explanation = "We rated your pronunciation samples across " + totalPhonemes;
   explanation += " pronunciation categories. Each category was given a rank of Not Close to Bullseye.";
@@ -135,23 +149,6 @@ function chartExplanation() {
   explanation += "and " + ringFourPercentage + "% as " + RING_FOUR_LABEL + ".";
 
   document.getElementById("div-explanation").innerHTML = explanation;
-
-
-  // for (var i = 0; i < lines.length; i++) {
-  //   // writeVariable(lines[i], 100, 100 + 30 * i, FONT_STYLE_20PX_BOLD, BLACK);
-  //   write(lines[i], 100, 100 + 30 * i);
-  // }
-
-  // var totalPhonemes = totalRingOnes.length + totalRingTwos.length + totalRingThrees.length + totalRingFours.length;
-  // var ringOnePercentage = (totalRingOnes.length / totalPhonemes * 100).toFixed(1);
-  // var ringTwoPercentage = (totalRingTwos.length / totalPhonemes * 100).toFixed(1);
-  // var ringThreePercentage = (totalRingThrees.length / totalPhonemes * 100).toFixed(1);
-  // var ringFourPercentage = (totalRingFours.length / totalPhonemes * 100).toFixed(1);
-
-  // writeVariable(totalRingOnes.length + " - " + ringOnePercentage, 100, 100, FONT_STYLE_20PX_BOLD, BLACK);
-  // writeVariable(totalRingTwos.length + " - " + ringTwoPercentage, 100, 130, FONT_STYLE_20PX_BOLD, BLACK);
-  // writeVariable(totalRingThrees.length + " - " + ringThreePercentage, 100, 160, FONT_STYLE_20PX_BOLD, BLACK);
-  // writeVariable(totalRingFours.length + " - " + ringFourPercentage, 100, 190, FONT_STYLE_20PX_BOLD, BLACK);
 
 }
 
